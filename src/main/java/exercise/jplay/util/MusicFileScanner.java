@@ -1,11 +1,11 @@
 package exercise.jplay.util;
 
 import java.io.IOException;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 
 public abstract class MusicFileScanner {
@@ -16,34 +16,37 @@ public abstract class MusicFileScanner {
         }
     };
 
-    public static List<Path> findFiles(List<Path> directories) {
+    public static List<Path> findFiles(List<Path> directories) throws IOException {
         final List<Path> files = new ArrayList<>();
-        directories.forEach(dir -> {
-            if (Files.isDirectory(dir))
-                files.add(dir.normalize());
-            else if (Files.isRegularFile(dir)) {
-                try {
-                    files.addAll(findFiles(dir));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+        for (Path dir : directories) {
+            if (isMusicFile(dir)) {
+                files.add(dir);
+            } else {
+                List<Path> musicFiles = findFiles(dir);
+                files.addAll(musicFiles);
             }
-        });
+        }
         return files;
     }
 
-    protected static List<Path> findFiles(final Path directory) throws IOException {
+    protected static List<Path> findFiles(final Path directory) throws IOException, SecurityException {
         final List<Path> files = new ArrayList<>();
-        try(Stream<Path> paths = Files.walk(directory)) {
-            return paths.filter(MusicFileScanner::isMusicFile).toList();
-        }catch (Exception e) {
-            e.printStackTrace();
-            throw e;
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(directory)) {
+            stream.forEach(path -> {
+                if (isMusicFile(path)) {
+                    files.add(path);
+                }
+            });
         }
+        return files;
     }
 
     protected static boolean isMusicFile(Path file) {
-        String fileExtension = file.getFileName().toString().split("\\.")[0];
+        if (Files.isDirectory(file)) return false;
+        String[] temp = file.getFileName()
+                            .toString()
+                            .split("[.]");
+        String fileExtension = temp[temp.length - 1];
         return ALLOWED_EXTENSIONS.contains(fileExtension);
     }
 
