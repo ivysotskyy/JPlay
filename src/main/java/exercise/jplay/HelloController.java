@@ -18,4 +18,9 @@ public class HelloController {
         return "hello";
     }
 
+    @RequestMapping(path="/random", method = RequestMethod.GET)
+    public String randomSong(Model model) {
+        model.addAttribute("src", "/sound/file_example_MP3_2MG.mp3");
+        return "random";
+    }
 }
