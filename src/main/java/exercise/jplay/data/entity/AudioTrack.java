@@ -9,17 +9,20 @@ import java.util.Set;
 @Entity
 public class AudioTrack {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue
     @Column(name = "track_id", nullable = false)
     private Long id;
     private String title;
     private String author;
     private String album;
+    @Column(name="duration_sec")
     private int durationSeconds;
-    private Date date;
+    private Date releaseDate;
     private String comment;
     @Column(name = "file_path", nullable = false)
     private String filePath;
+    @Column(nullable = false)
+    private String fileName;
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "track_genres")
     private Set<String> genres;
@@ -75,12 +78,12 @@ public class AudioTrack {
         this.genres = genres;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setReleaseDate(Date date) {
+        this.releaseDate = date;
     }
 
     public String getComment() {
@@ -98,4 +101,11 @@ public class AudioTrack {
         return filePath;
     }
 
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
 }

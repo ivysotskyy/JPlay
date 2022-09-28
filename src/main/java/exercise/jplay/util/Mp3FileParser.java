@@ -90,6 +90,7 @@ public class Mp3FileParser implements AudioFileParser {
         String filePath = path.toString();
         AudioTrack track = new AudioTrack();
         track.setFilePath(filePath);
+        track.setFileName(path.getFileName().toString());
         track.setTitle(title);
         track.setAuthor(author);
         track.setAlbum(album);

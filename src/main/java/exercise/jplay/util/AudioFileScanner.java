@@ -13,7 +13,7 @@ public abstract class AudioFileScanner {
     private static final ArrayList<String> ALLOWED_EXTENSIONS = new ArrayList<>() {
         {
             add("mp3");
-            add("wav");
+            //add("wav");
         }
     };
 

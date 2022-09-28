@@ -1,7 +1,6 @@
 package exercise.jplay.data.repository;
 
 import exercise.jplay.data.entity.AudioTrack;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ public class TestRepository {
         statement.setString(2, track.getAuthor());
         statement.setString(3, track.getAlbum());
         statement.setInt(4, track.getDurationSeconds());
-        statement.setDate(5, track.getDate() == null ? null : new java.sql.Date(track.getDate().getTime()));
+        statement.setDate(5, track.getReleaseDate() == null ? null : new java.sql.Date(track.getReleaseDate().getTime()));
         statement.setString(6, track.getComment());
         statement.setString(7, track.getFilePath());
 
@@ -26,7 +25,7 @@ public class TestRepository {
     }
 
     public TestRepository() throws SQLException {
-        conn = DriverManager.getConnection("jdbc:h2:./data/demo", "sa", "");
+        conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/./demo", "sa", "");
     }
 
     public List<String> allSongs() throws SQLException {
