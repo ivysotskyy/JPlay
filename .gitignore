@@ -19,8 +19,10 @@
 *.tar.gz
 *.rar
 
+SpringBoot.md
 HELP.md
 target/
+**.db
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -58,5 +60,4 @@ hs_err_pid*
 
 # database
 /data/
-
-SpringBoot.md
+/db/
