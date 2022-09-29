@@ -15,5 +15,4 @@ public interface AudioTrackRepository extends JpaRepository<AudioTrack, Long> {
     List<AudioTrack> findByTitle(@Param("title") String title);
 
     List<AudioTrack> findByAuthor(String artist);
-
 }

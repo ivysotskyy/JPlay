@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 import exercise.jplay.data.entity.AudioTrack;
-import exercise.jplay.util.Mp3FileParser;
+import exercise.jplay.util.parser.Mp3FileParser;
 import org.farng.mp3.TagException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

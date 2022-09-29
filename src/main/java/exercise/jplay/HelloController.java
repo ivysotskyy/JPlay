@@ -1,9 +1,9 @@
 package exercise.jplay;
 
 import exercise.jplay.data.repository.AudioTrackRepository;
-import exercise.jplay.util.AudioFileParser;
+import exercise.jplay.util.parser.AudioFileParser;
 import exercise.jplay.util.AudioFileScanner;
-import exercise.jplay.util.Mp3FileParser;
+import exercise.jplay.util.parser.Mp3FileParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +22,7 @@ public class HelloController {
     @Autowired
     AudioTrackRepository repository;
     AudioFileParser parser = new Mp3FileParser();
+
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String hello(
             Model model,
@@ -31,11 +32,11 @@ public class HelloController {
         return "hello";
     }
 
-    @RequestMapping(path="/random", method = RequestMethod.GET)
+    @RequestMapping(path = "/random", method = RequestMethod.GET)
     public String randomSong(Model model) throws IOException,
             UnsupportedAudioFileException {
         //model.addAttribute("src", "/sound/file_example_MP3_2MG.mp3");
-        for(Path p : AudioFileScanner.findFiles(List.of(Path.of("src/test/resources/samples")))) {
+        for (Path p : AudioFileScanner.findFiles(List.of(Path.of("src/test/resources/samples")))) {
             repository.save(parser.parseAudioTrack(p));
         }
 

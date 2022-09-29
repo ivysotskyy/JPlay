@@ -30,7 +30,7 @@ public abstract class AudioFileScanner {
         return files;
     }
 
-    protected static List<Path> findFiles(final Path directory) throws IOException, SecurityException {
+    private static List<Path> findFiles(final Path directory) throws IOException, SecurityException {
         final List<Path> files = new ArrayList<>();
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(directory)) {
             stream.forEach(path -> {

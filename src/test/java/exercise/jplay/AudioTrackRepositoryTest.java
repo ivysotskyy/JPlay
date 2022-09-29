@@ -32,7 +32,6 @@ public class AudioTrackRepositoryTest {
         track.setComment("comment");
         track.setReleaseDate(date);
         repository.save(track);
-
         List<AudioTrack> tracks = repository.findByTitle("Test Title 1");
         assertEquals(1, tracks.size());
         assertEquals(track, tracks.get(0));

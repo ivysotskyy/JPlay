@@ -284,3 +284,23 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: E:/Projects/JPla
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:444)
 	... 28 more
+2022-09-28 14:48:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "delete [*]* from track"; erwartet "identifier"
+Syntax error in SQL statement "delete [*]* from track"; expected "identifier"; SQL statement:
+delete * from track [42001-214]
+2022-09-28 14:48:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "alter table delete [*]* from track"; erwartet "., ADD, SET, RENAME, DROP, ALTER"
+Syntax error in SQL statement "alter table delete [*]* from track"; expected "., ADD, SET, RENAME, DROP, ALTER"; SQL statement:
+alter table delete * from track [42001-214]
+2022-09-28 14:48:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "delete [*]* from track"; erwartet "identifier"
+Syntax error in SQL statement "delete [*]* from track"; expected "identifier"; SQL statement:
+delete * from track [42001-214]
+2022-09-28 14:49:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "delete from track where[*]"; erwartet "INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
+Syntax error in SQL statement "delete from track where[*]"; expected "INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+delete from track where [42001-214]
+2022-09-28 14:49:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "delete from track where [*]*"; erwartet "INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
+Syntax error in SQL statement "delete from track where [*]*"; expected "INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+delete from track where * [42001-214]

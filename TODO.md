@@ -34,15 +34,15 @@
 ---
 
 - [ ] **Mapping file data to entities**
-  - [ ] Create General POJO such as *Track*, *Genre*, *Playlist* etc.
-  - [ ] Create some parsers to Instantiate *Tracks*
-  - [ ] Create mappers to persist the entities in the database.
+  - [ ] Create General POJO such as *Track*, *<del>Genre</del>*, *Playlist* etc.
+  - [x] Create some parsers to Instantiate *Tracks*
+  - [x] Create mappers to persist the entities in the database.
 
 ---
 
-- [ ] **Database**
-  - [ ] Design some ERD
-  - [ ] Create tables.
+- [x] **Database**
+  - [x] Design some ERD
+  - [x] Create tables.
 ---
 
 - [ ] **User sessions**

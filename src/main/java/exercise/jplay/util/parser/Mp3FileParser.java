@@ -1,4 +1,4 @@
-package exercise.jplay.util;
+package exercise.jplay.util.parser;
 
 
 import exercise.jplay.data.entity.AudioTrack;
@@ -11,52 +11,8 @@ import java.util.Map;
 
 public class Mp3FileParser implements AudioFileParser {
 
-
-/*
-    public static MP3File read(Path path) throws IOException, TagException,
-            UnsupportedAudioFileException {
-        MP3File file = new MP3File(path.toFile());
-        if (file.hasID3v2Tag()) {
-            ID3v2_2 tag = (ID3v2_2) file.getID3v2Tag();
-            System.out.println(file.getMp3file());
-            System.out.println(tag.getIdentifier());
-            System.out.println(tag.getSongTitle());
-            System.out.println(tag.getAlbumTitle());
-            System.out.println(tag.getSongGenre());
-            System.out.println(tag.getAuthorComposer());
-            System.out.println(tag.getSongComment());
-            System.out.println(tag.getSongLyric());
-            System.out.println(tag.getSize());
-        }
-
-
-
-
-        AudioInputStream stream = AudioSystem.getAudioInputStream(path.toFile());
-        AudioFormat format = stream.getFormat();
-        long audioFileLength = path.toFile()
-                                   .length();
-        float frameSize = format.getFrameSize();
-        float frameRate = format.getFrameRate();
-        float sampleSize = format.getSampleSizeInBits();
-        float sampleRate = format.getSampleRate();
-        int channels = format.getChannels();
-        System.out.println(format);
-        System.out.println("___");
-        System.out.println("Length: " + audioFileLength);
-        System.out.println("Frame Size: " + frameSize);
-        System.out.println("Frame Rate: " + frameRate);
-        System.out.println("Sample Size: " + sampleSize);
-        System.out.println("Sample Rate: " + sampleRate);
-        System.out.println("Channels: " + channels);
-        float durationInSeconds = (audioFileLength / (sampleRate * channels * sampleSize/8));
-        System.out.println(durationInSeconds);
-        return file;
-    }
-*/
-
     /*
-     *   Audio File Format Properties
+     *   Audio File Format Properties in ID3
      * +-------------+------------+-----------------------------------------------+
      * |Property key | Value type | Description                                   |
      * |-------------|------------|-----------------------------------------------|
@@ -70,11 +26,15 @@ public class Mp3FileParser implements AudioFileParser {
      */
 
     /**
+     * Extracts metadata from a .mp3 file and returns new
+     * {@link exercise.jplay.data.entity.AudioTrack} instance.
      *
-     * @param path
-     * @return
+     * @param path Path to a mp3 music file.
+     * @return {@link exercise.jplay.data.entity.AudioTrack}
      * @throws UnsupportedAudioFileException
      * @throws IOException
+     * @see exercise.jplay.data.entity.AudioTrack AudioTrack
+     * @see exercise.jplay.util.AudioFileScanner AudioFileScanner
      */
     @Override
     public AudioTrack parseAudioTrack(Path path) throws
@@ -90,7 +50,8 @@ public class Mp3FileParser implements AudioFileParser {
         String filePath = path.toString();
         AudioTrack track = new AudioTrack();
         track.setFilePath(filePath);
-        track.setFileName(path.getFileName().toString());
+        track.setFileName(path.getFileName()
+                              .toString());
         track.setTitle(title);
         track.setAuthor(author);
         track.setAlbum(album);

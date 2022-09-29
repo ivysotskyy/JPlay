@@ -1,4 +1,4 @@
-package exercise.jplay.util;
+package exercise.jplay.util.parser;
 
 import exercise.jplay.data.entity.AudioTrack;
 

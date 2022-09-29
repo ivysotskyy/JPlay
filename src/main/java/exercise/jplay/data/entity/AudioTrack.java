@@ -15,7 +15,7 @@ public class AudioTrack {
     private String title;
     private String author;
     private String album;
-    @Column(name="duration_sec")
+    @Column(name = "duration_sec")
     private int durationSeconds;
     private Date releaseDate;
     private String comment;
@@ -93,6 +93,7 @@ public class AudioTrack {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
