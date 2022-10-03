@@ -1,13 +1,15 @@
 package exercise.jplay.data.repository;
 
 import exercise.jplay.data.entity.AudioTrack;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface AudioTrackRepository extends JpaRepository<AudioTrack, Long> {
+public interface AudioTrackRepository extends JpaRepository<AudioTrack, Long>, JpaSpecificationExecutor {
 
     AudioTrack findById(long id);
 

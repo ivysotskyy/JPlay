@@ -26,7 +26,7 @@ Maven
 version **3.0.0(M4)**
 + Spring Web
 + Thymeleaf
-+ <del>Hibernate JPA</del>
++ Hibernate JPA
 
 ### Server
 [Tomcat 10](https://tomcat.apache.org/download-10.cgi)

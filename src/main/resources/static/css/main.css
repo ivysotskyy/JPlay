@@ -1,3 +1,40 @@
-.hello-title {
-    color: darkgreen;
+body {
+    max-width: 80%;
+    min-width: 50%;
+    padding: 0;
+    margin: auto;
+
+}
+header {
+    height: 50px;
+    background: black;
+    padding: 0 0 10px;
+    margin: auto;
+}
+
+#tracks {
+    max-width: 70%;
+    max-height: 45rem;
+    min-height: 40rem;
+}
+
+.top-bar {
+    position: sticky;
+}
+
+.track, .top-bar {
+    border: 1px solid #ddd;
+    padding: 0 5px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.track:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+.track h3:first-child {
+    flex-basis: 100%;
+    text-transform: capitalize;
 }

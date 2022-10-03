@@ -1,0 +1,21 @@
+#tracks {
+    max-width: 70%;
+    max-height: 45rem;
+    min-height: 40rem;
+}
+
+#tracks table {
+    font-size: 15px;
+    border-collapse : collapse;
+    border-spacing: 0;
+}
+#tracks table td, #tracks table th {
+    white-space: nowrap;
+    margin: 0;
+    border: 1px solid #ddd;
+    text-align: left;
+    min-width: 10rem;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}

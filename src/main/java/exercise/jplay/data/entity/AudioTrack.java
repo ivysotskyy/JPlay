@@ -2,6 +2,9 @@ package exercise.jplay.data.entity;
 
 import jakarta.persistence.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.Date;
 import java.util.Set;
 
@@ -39,6 +42,8 @@ public class AudioTrack {
     }
 
     public String getTitle() {
+        if(title == null || title.isEmpty())
+            return fileName;
         return title;
     }
 
@@ -62,6 +67,20 @@ public class AudioTrack {
         this.album = album;
     }
 
+    public String getDurationTime() {
+        Duration duration = Duration.ofSeconds(this.durationSeconds);
+        StringBuilder sb = new StringBuilder();
+        int hours = duration.toHoursPart();
+        int minutes = duration.toMinutesPart();
+        int seconds = duration.toSecondsPart();
+        return sb.append(hours)
+                 .append(":")
+                 .append(minutes > 9 ? minutes : ("0"+minutes))
+                 .append(":")
+                 .append(seconds > 9 ? seconds : ("0"+seconds))
+                 .toString();
+    }
+
     public int getDurationSeconds() {
         return durationSeconds;
     }
@@ -82,8 +101,21 @@ public class AudioTrack {
         return releaseDate;
     }
 
+    /**
+     * Overloads standard getter to provide some
+     * view formatting.
+     * @param format Date format patter
+     * @return String representation of the Release date
+     */
+    public String getReleaseDate(String format) {
+        if(releaseDate == null)
+            return "N/A";
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
+        return dateFormat.format(releaseDate);
+    }
+
     public void setReleaseDate(Date date) {
-        this.releaseDate = date;
+        releaseDate = date;
     }
 
     public String getComment() {
