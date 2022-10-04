@@ -5,6 +5,7 @@ body {
     margin: auto;
 
 }
+
 header {
     height: 50px;
     background: black;
@@ -13,6 +14,7 @@ header {
 }
 
 #tracks {
+    overflow-y: auto;
     max-width: 70%;
     max-height: 45rem;
     min-height: 40rem;
@@ -20,9 +22,11 @@ header {
 
 .top-bar {
     position: sticky;
+    text-align: center;
 }
 
-.track, .top-bar {
+.display {
+    text-transform: capitalize;
     border: 1px solid #ddd;
     padding: 0 5px;
     display: flex;
@@ -30,11 +34,37 @@ header {
     justify-content: space-between;
 }
 
+.display a {
+    color: black;
+    text-decoration: none;
+}
+
+.display a:hover {
+    text-decoration-line: underline;
+    font-weight: bold;
+}
+
+.display * {
+    min-width: 12rem;
+}
+
+.track {
+    overflow-x: auto;
+}
+
+.track * {
+    overflow-x: auto;
+}
+
+.display :last-child {
+    text-align: right;
+}
+
 .track:nth-child(even) {
     background-color: #f2f2f2
 }
 
 .track h3:first-child {
+    border-bottom: 1px solid #ddd;
     flex-basis: 100%;
-    text-transform: capitalize;
 }

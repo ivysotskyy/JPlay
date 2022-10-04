@@ -2,10 +2,10 @@ package exercise.jplay.data.entity;
 
 import jakarta.persistence.*;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Set;
 
 @Table(name = "track")
@@ -27,10 +27,28 @@ public class AudioTrack {
     @Column(nullable = false)
     private String fileName;
     @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "track_genres")
+    @CollectionTable(name = "track_genres", joinColumns = @JoinColumn(name = "track_id"))
     private Set<String> genres;
 
     public AudioTrack() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        AudioTrack track = (AudioTrack) o;
+        return Objects.equals(filePath, track.getFilePath()) &&
+                Objects.equals(title, track.getTitle()) &&
+                Objects.equals(author, track.getAuthor()) &&
+                Objects.equals(album, track.album);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(filePath, title, author, album);
     }
 
     public void setId(Long id) {
@@ -42,8 +60,6 @@ public class AudioTrack {
     }
 
     public String getTitle() {
-        if(title == null || title.isEmpty())
-            return fileName;
         return title;
     }
 
@@ -75,9 +91,9 @@ public class AudioTrack {
         int seconds = duration.toSecondsPart();
         return sb.append(hours)
                  .append(":")
-                 .append(minutes > 9 ? minutes : ("0"+minutes))
+                 .append(minutes > 9 ? minutes : ("0" + minutes))
                  .append(":")
-                 .append(seconds > 9 ? seconds : ("0"+seconds))
+                 .append(seconds > 9 ? seconds : ("0" + seconds))
                  .toString();
     }
 
@@ -104,11 +120,12 @@ public class AudioTrack {
     /**
      * Overloads standard getter to provide some
      * view formatting.
+     *
      * @param format Date format patter
      * @return String representation of the Release date
      */
     public String getReleaseDate(String format) {
-        if(releaseDate == null)
+        if (releaseDate == null)
             return "N/A";
         SimpleDateFormat dateFormat = new SimpleDateFormat(format);
         return dateFormat.format(releaseDate);

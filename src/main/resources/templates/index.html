@@ -1,7 +1,7 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" lang="">
+      xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,18 +12,20 @@
 <header>
 
 </header>
-<div style="overflow-x:auto; overflow-y:auto;" id="tracks">
-    <div class="top-bar">
+<div id="tracks">
+    <div class="top-bar display">
         <div>Title</div>
         <div>Genres</div>
         <div>Album</div>
         <div>Duration</div>
     </div>
     <div class="track-list">
-        <div th:each="track : ${tracks}" class="track">
-            <h3 th:text="${track.getTitle()}"></h3>
+        <div th:each="track : ${tracks}" class="track display">
+            <h3 th:text="${track.getTitle()} ? ${track.title} : ${track.getFileName()}"></h3>
             <div th:text="${track.getAuthor()} ? ${track.author} : 'Unknown'"></div>
-            <div th:text="${track.getGenres()} ? ${track.genres} : 'N/A'"></div>
+            <div>
+                <a th:each="genre : ${track.genres}" href="#" th:text="${genre} + ' ' "></a>
+            </div>
             <div th:text="${track.getAlbum()} ? ${track.album} : 'Unknown'"></div>
             <div th:text="${track.getDurationTime()}"></div>
             <!--<p th:text='|ReleaseDate: ${track.getReleaseDate("dd MMM yyy")}|'></p>-->
@@ -54,7 +56,7 @@
             <td th:text="${track.getFilePath()}"></td>
         </tr>
     </table>
-    -->
+-->
 </div>
 
 <script src="/js/main.js"></script>
