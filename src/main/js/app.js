@@ -1,6 +1,7 @@
 const React = require("react");
 const {createRoot} = require("react-dom/client");
-const client = require("./client");
+// const client = require("./client");
+const axios = require("axios").default;
 
 class App extends React.Component {
 
@@ -12,14 +13,17 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        client({
-            method: "GET", path: "/api/audioTracks"
-        }).then(response => {
+
+        axios.get("/api/audioTracks?size=100").then(response => {
             console.log(response);
             this.setState({
-                audioTracks: response.entity._embedded.audioTracks
+
+                audioTracks: response.data._embedded.audioTracks
             });
-        });
+        }).catch(err => {
+            console.log(err)
+        })
+
     }
 
     render() {
