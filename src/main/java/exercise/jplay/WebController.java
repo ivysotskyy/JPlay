@@ -25,7 +25,7 @@ public class WebController {
 
         model.addAttribute("tracks", tracks);
 
-        return "index";
+        return "react";
     }
     // get all songs
     // select song

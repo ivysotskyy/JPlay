@@ -13,7 +13,7 @@ header {
     margin: auto;
 }
 
-#tracks {
+.tracks {
     overflow-y: auto;
     max-width: 70%;
     max-height: 45rem;
@@ -46,14 +46,6 @@ header {
 
 .display * {
     min-width: 12rem;
-}
-
-.track {
-    overflow-x: auto;
-}
-
-.track * {
-    overflow-x: auto;
 }
 
 .display :last-child {
