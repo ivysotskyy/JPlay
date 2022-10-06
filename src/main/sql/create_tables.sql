@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS track
     release_date date,
     comment      varchar(255),
     file_path    varchar(255) NOT NULL,
-    file_name    varchar(255) NOT NULL,
+    file_name    varchar(255),
     PRIMARY KEY (track_id)
 );
 

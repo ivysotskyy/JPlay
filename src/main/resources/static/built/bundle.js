@@ -35942,6 +35942,8 @@ var __webpack_exports__ = {};
   \****************************/
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -35995,7 +35997,7 @@ var App = /*#__PURE__*/function (_React$Component) {
         method: "GET",
         path: "/api/audioTracks"
       }).then(function (response) {
-        console.log(response.entity._embedded.audioTracks);
+        console.log(response);
 
         _this2.setState({
           audioTracks: response.entity._embedded.audioTracks
@@ -36053,9 +36055,24 @@ var AudioTrack = /*#__PURE__*/function (_React$Component3) {
   var _super3 = _createSuper(AudioTrack);
 
   function AudioTrack() {
+    var _this3;
+
     _classCallCheck(this, AudioTrack);
 
-    return _super3.apply(this, arguments);
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this3 = _super3.call.apply(_super3, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this3), "formatTimeSeconds", function (seconds) {
+      var date = new Date(seconds * 1000);
+      console.log(date);
+      console.log(date.toISOString());
+      return date.toISOString().substring(11, 19);
+    });
+
+    return _this3;
   }
 
   _createClass(AudioTrack, [{
@@ -36066,17 +36083,16 @@ var AudioTrack = /*#__PURE__*/function (_React$Component3) {
         className: "track display"
       }, /*#__PURE__*/React.createElement("h3", null, title != null ? title : this.props.track.fileName), /*#__PURE__*/React.createElement("div", null, this.props.track.author), /*#__PURE__*/React.createElement("div", null, this.props.track.album), /*#__PURE__*/React.createElement("div", null, this.props.track.genres.map(function (genre) {
         return /*#__PURE__*/React.createElement("a", {
+          key: genre,
           href: "#"
         }, genre + " ");
-      })), /*#__PURE__*/React.createElement("div", null, this.props.track.durationSeconds));
+      })), /*#__PURE__*/React.createElement("div", null, this.formatTimeSeconds(this.props.track.durationSeconds)));
     }
-  }, {
-    key: "formatTimeSeconds",
-    value: function formatTimeSeconds(seconds) {}
   }]);
 
   return AudioTrack;
-}(React.Component);
+}(React.Component); // 1970-01-01T00:01:58.000Z
+
 
 createRoot(document.getElementById("react")).render( /*#__PURE__*/React.createElement(App, null));
 })();

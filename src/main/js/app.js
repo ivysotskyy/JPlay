@@ -15,7 +15,7 @@ class App extends React.Component {
         client({
             method: "GET", path: "/api/audioTracks"
         }).then(response => {
-            console.log(response.entity._embedded.audioTracks);
+            console.log(response);
             this.setState({
                 audioTracks: response.entity._embedded.audioTracks
             });
@@ -68,21 +68,26 @@ class AudioTrack extends React.Component {
                 <div>
                     {
                         this.props.track.genres.map(genre => {
-                            return <a href={"#"}>{genre + " " }</a>
+                            return <a key={genre} href={"#"}>{genre + " " }</a>
                         })
                     }
                 </div>
-                <div>{this.props.track.durationSeconds}</div>
+                <div>{this.formatTimeSeconds(this.props.track.durationSeconds)}</div>
 
             </div>
 
         )
     }
 
-    formatTimeSeconds(seconds) {
+    formatTimeSeconds = (seconds) => {
+       let date = new Date(seconds * 1000);
+        console.log(date)
+        console.log(date.toISOString())
+       return date.toISOString().substring(11, 19);
 
     }
 
 }
+// 1970-01-01T00:01:58.000Z
 
 createRoot(document.getElementById("react")).render(<App/>);

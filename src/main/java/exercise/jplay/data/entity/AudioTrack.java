@@ -24,7 +24,7 @@ public class AudioTrack {
     private String comment;
     @Column(name = "file_path", nullable = false)
     private String filePath;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String fileName;
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "track_genres", joinColumns = @JoinColumn(name = "track_id"))
@@ -81,20 +81,6 @@ public class AudioTrack {
 
     public void setAlbum(String album) {
         this.album = album;
-    }
-
-    public String getDurationTime() {
-        Duration duration = Duration.ofSeconds(this.durationSeconds);
-        StringBuilder sb = new StringBuilder();
-        int hours = duration.toHoursPart();
-        int minutes = duration.toMinutesPart();
-        int seconds = duration.toSecondsPart();
-        return sb.append(hours)
-                 .append(":")
-                 .append(minutes > 9 ? minutes : ("0" + minutes))
-                 .append(":")
-                 .append(seconds > 9 ? seconds : ("0" + seconds))
-                 .toString();
     }
 
     public int getDurationSeconds() {
