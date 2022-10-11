@@ -1,24 +1,33 @@
 const React = require("react");
 const {createRoot} = require("react-dom/client");
-// const client = require("./client");
 const axios = require("axios").default;
+const TrackList = require("./TrackList");
+const AudioPlayer = require("./AudioPlayer");
 
 class App extends React.Component {
 
     constructor(props) {
+
         super(props);
         this.state = {
-            audioTracks: []
+            audioTracks: [],
+            selectedSong: "",
+            songPlaying: ""
         };
+    }
+
+    onPlayAction(track) {
+        console.log(track)
+        this.setState({songPlaying: track})
     }
 
     componentDidMount() {
 
-        axios.get("/api/audioTracks?size=100").then(response => {
-            console.log(response);
+        //Get api routes
+        axios.get("/api/audioTracks?size=1000").then(response => {
             this.setState({
-
-                audioTracks: response.data._embedded.audioTracks
+                links: response.data._links,
+                audioTracks: response.data._embedded.audioTracks,
             });
         }).catch(err => {
             console.log(err)
@@ -27,71 +36,33 @@ class App extends React.Component {
     }
 
     render() {
+        /**
+         * root: *The http-server hosting the music files.
+         * because of chrome security reasons.
+         */
         return (
-            <TrackList audioTracks={this.state.audioTracks}/>
+            <div className={"wrapper"}>
+                <TrackList onPlayButton={this.onPlayAction.bind(this)} audioTracks={this.state.audioTracks} links={this.state.links}/>
+                <AudioPlayer root={"http://localhost:8081/"} song={this.state.songPlaying}></AudioPlayer>
+            </div>
         );
     }
 
 }
 
-class TrackList extends React.Component {
+class TrackDetails extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
     render() {
-        const tracks = this.props.audioTracks.map(track => {
-            return <AudioTrack key={track._links.self.href} track={track}/>
-        });
         return (
+            <div className={"trackDetails"}>
 
-            <div className={"tracks"}>
-                <div className={"top-bar display"}>
-                    <div>Title</div>
-                    <div>Genres</div>
-                    <div>Album</div>
-                    <div>Duration</div>
-                </div>
-                <div className={"track-list"}>
-                    {tracks}
-                </div>
             </div>
-
         )
     }
 
-
 }
-
-class AudioTrack extends React.Component {
-
-    render() {
-        const title = this.props.track.title
-        return (
-            <div className={"track display"}>
-                <h3>{title != null ? title : this.props.track.fileName}</h3>
-                <div>{this.props.track.author}</div>
-                <div>{this.props.track.album}</div>
-                <div>
-                    {
-                        this.props.track.genres.map(genre => {
-                            return <a key={genre} href={"#"}>{genre + " " }</a>
-                        })
-                    }
-                </div>
-                <div>{this.formatTimeSeconds(this.props.track.durationSeconds)}</div>
-
-            </div>
-
-        )
-    }
-
-    formatTimeSeconds = (seconds) => {
-       let date = new Date(seconds * 1000);
-        console.log(date)
-        console.log(date.toISOString())
-       return date.toISOString().substring(11, 19);
-
-    }
-
-}
-// 1970-01-01T00:01:58.000Z
 
 createRoot(document.getElementById("react")).render(<App/>);

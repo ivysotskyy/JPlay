@@ -13,9 +13,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -69,7 +67,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
     }
 
     // Delete Me
-    private List<AudioTrack> addMoreSongs(List<AudioTrack> tracks) {
+    private void addMoreSongs(List<AudioTrack> tracks) {
         for(int i = 1; i <= 100; i++) {
             AudioTrack t = new AudioTrack();
             t.setTitle("example track Nr. " + i);
@@ -83,7 +81,6 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
             t.setFileName("example-" + i + ".mp3");
             tracks.add(t);
         }
-        return tracks;
     }
 
 }

@@ -21,9 +21,8 @@ public class WebController {
     @GetMapping("/")
     public String index(Model model) {
 
-        List<AudioTrack> tracks = repository.findAll();
-
-        model.addAttribute("tracks", tracks);
+        //List<AudioTrack> tracks = repository.findAll();
+        //model.addAttribute("tracks", tracks);
 
         return "react";
     }

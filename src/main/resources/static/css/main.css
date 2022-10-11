@@ -18,15 +18,24 @@ header {
     max-width: 70%;
     max-height: 45rem;
     min-height: 40rem;
+    border-radius: 4px;
 }
 
 .top-bar {
+    top: 0;
+    position: -webkit-sticky;
     position: sticky;
     text-align: center;
+    background-color: darkgray;
+    opacity: 80%;
+}
+
+.container {
+    width: 100%;
+    display:flex;
 }
 
 .display {
-    text-transform: capitalize;
     border: 1px solid #ddd;
     padding: 0 5px;
     display: flex;
@@ -52,6 +61,10 @@ header {
     text-align: right;
 }
 
+.track {
+    width: 100%;
+}
+
 .track:nth-child(even) {
     background-color: #f2f2f2
 }
@@ -59,4 +72,15 @@ header {
 .track h3:first-child {
     border-bottom: 1px solid #ddd;
     flex-basis: 100%;
+}
+
+.audio-player {
+    margin-top: 1rem;
+    padding: 0;
+    width: 100%;
+    height: 8rem;
+}
+
+.current-track {
+    margin: 0.2rem 1rem;
 }
