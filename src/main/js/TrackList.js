@@ -5,7 +5,7 @@ module.exports = class TrackList extends React.Component {
 
     render() {
         const tracks = this.props.audioTracks.map(track => {
-            return <AudioTrack onPlayButton={this.props.onPlayButton} key={track._links.self.href} track={track}/>
+            return <AudioTrack handleTrackSelected={this.props.handleTrackSelected} onPlayButton={this.props.onPlayButton} key={track._links.self.href} track={track}/>
         });
         return (
 

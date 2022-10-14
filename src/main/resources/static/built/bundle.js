@@ -142,6 +142,9 @@ module.exports = /*#__PURE__*/function (_React$Component) {
           _this2.props.onPlayButton(_this2.props.track);
         }
       }, "Play"), /*#__PURE__*/React.createElement("div", {
+        onClick: function onClick(event) {
+          _this2.props.handleTrackSelected(_this2.props.track);
+        },
         className: "track display"
       }, /*#__PURE__*/React.createElement("h3", null, title != null ? title : this.props.track.fileName), /*#__PURE__*/React.createElement("div", null, this.props.track.author), /*#__PURE__*/React.createElement("div", null, this.props.track.album), /*#__PURE__*/React.createElement("div", null, this.props.track.genres.map(function (genre) {
         return /*#__PURE__*/React.createElement("a", {
@@ -153,6 +156,162 @@ module.exports = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return AudioTrack;
+}(React.Component);
+
+/***/ }),
+
+/***/ "./src/main/js/TrackDetails.js":
+/*!*************************************!*\
+  !*** ./src/main/js/TrackDetails.js ***!
+  \*************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+module.exports = /*#__PURE__*/function (_React$Component) {
+  _inherits(TrackDetails, _React$Component);
+
+  var _super = _createSuper(TrackDetails);
+
+  function TrackDetails(props) {
+    var _this;
+
+    _classCallCheck(this, TrackDetails);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      track: props.track
+    };
+    console.log("ctor");
+    return _this;
+  }
+
+  _createClass(TrackDetails, [{
+    key: "removeGenre",
+    value: function removeGenre(genre) {
+      this.state.track.genres = this.state.track.genres.filter(function (g) {
+        return g !== genre;
+      });
+      this.setState(this.state);
+      console.log(this.state);
+    }
+  }, {
+    key: "addGenre",
+    value: function addGenre(genre) {
+      this.state.track.genres.concat(genre);
+      this.setState(this.state);
+      console.log(this.state);
+    }
+  }, {
+    key: "handleTitleChange",
+    value: function handleTitleChange(value, event) {
+      this.setState(_defineProperty({}, event.target, value));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      if (!this.props.track) {
+        return /*#__PURE__*/React.createElement("h2", null, "Select Track");
+      }
+
+      var genres = this.state.track.genres.map(function (genre) {
+        return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
+          value: genre,
+          id: genre,
+          name: genre
+        }), /*#__PURE__*/React.createElement("button", {
+          type: "button",
+          onClick: function onClick(event) {
+            return _this2.removeGenre(genre);
+          }
+        }, "-"));
+      });
+      return /*#__PURE__*/React.createElement("div", {
+        className: "track-details"
+      }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("b", null, "Path: "), /*#__PURE__*/React.createElement("span", null, this.props.track.filePath)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("form", null, /*#__PURE__*/React.createElement("label", {
+        htmlFor: "title"
+      }, "Title:"), /*#__PURE__*/React.createElement("input", {
+        type: "text",
+        id: "title",
+        name: "title",
+        value: this.props.track.title,
+        onChange: function onChange(event) {
+          return _this2.handleTitleChange(_this2.value, event);
+        }
+      }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("label", {
+        htmlFor: "author"
+      }, "Author:"), /*#__PURE__*/React.createElement("input", {
+        type: "text",
+        id: "author",
+        name: "author",
+        value: this.props.track.author
+      }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("label", {
+        htmlFor: "genres"
+      }, "Genres:"), /*#__PURE__*/React.createElement("div", {
+        className: "genres"
+      }, genres, /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
+        type: "text",
+        id: "new-genre"
+      }), /*#__PURE__*/React.createElement("button", {
+        type: "button",
+        onClick: function onClick(event) {
+          return _this2.addGenre(document.getElementById("new-genre").value);
+        }
+      }, "+"))), /*#__PURE__*/React.createElement("label", {
+        htmlFor: "releaseDate"
+      }, "Release date:"), /*#__PURE__*/React.createElement("input", {
+        type: "date",
+        id: "releaseDate",
+        name: "releaseDate",
+        value: this.props.track.releaseDate
+      }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("label", {
+        htmlFor: "comment"
+      }, "Comment:"), /*#__PURE__*/React.createElement("textarea", {
+        style: {
+          resize: "none"
+        },
+        id: "comment",
+        name: "comment",
+        rows: "10",
+        value: this.props.track.comment
+      }), /*#__PURE__*/React.createElement("br", null))));
+    }
+  }], [{
+    key: "getDerivedStateFromProps",
+    value: function getDerivedStateFromProps(props, state) {
+      return {
+        track: props.track
+      };
+    }
+  }]);
+
+  return TrackDetails;
 }(React.Component);
 
 /***/ }),
@@ -207,6 +366,7 @@ module.exports = /*#__PURE__*/function (_React$Component) {
 
       var tracks = this.props.audioTracks.map(function (track) {
         return /*#__PURE__*/React.createElement(AudioTrack, {
+          handleTrackSelected: _this.props.handleTrackSelected,
           onPlayButton: _this.props.onPlayButton,
           key: track._links.self.href,
           track: track
@@ -44053,6 +44213,8 @@ var TrackList = __webpack_require__(/*! ./TrackList */ "./src/main/js/TrackList.
 
 var AudioPlayer = __webpack_require__(/*! ./AudioPlayer */ "./src/main/js/AudioPlayer.js");
 
+var TrackDetails = __webpack_require__(/*! ./TrackDetails */ "./src/main/js/TrackDetails.js");
+
 var App = /*#__PURE__*/function (_React$Component) {
   _inherits(App, _React$Component);
 
@@ -44064,10 +44226,20 @@ var App = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, App);
 
     _this = _super.call(this, props);
+    _this.track = {
+      author: "",
+      title: "",
+      filePath: "",
+      fileName: "",
+      duration: 0,
+      releaseDate: "",
+      comment: "",
+      genres: []
+    };
     _this.state = {
       audioTracks: [],
       selectedSong: "",
-      songPlaying: ""
+      songPlaying: _this.track
     };
     return _this;
   }
@@ -44075,9 +44247,15 @@ var App = /*#__PURE__*/function (_React$Component) {
   _createClass(App, [{
     key: "onPlayAction",
     value: function onPlayAction(track) {
-      console.log(track);
       this.setState({
         songPlaying: track
+      });
+    }
+  }, {
+    key: "onSelected",
+    value: function onSelected(track) {
+      this.setState({
+        selectedSong: track
       });
     }
   }, {
@@ -44105,9 +44283,12 @@ var App = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/React.createElement("div", {
         className: "wrapper"
       }, /*#__PURE__*/React.createElement(TrackList, {
+        handleTrackSelected: this.onSelected.bind(this),
         onPlayButton: this.onPlayAction.bind(this),
         audioTracks: this.state.audioTracks,
         links: this.state.links
+      }), /*#__PURE__*/React.createElement(TrackDetails, {
+        track: this.state.selectedSong
       }), /*#__PURE__*/React.createElement(AudioPlayer, {
         root: "http://localhost:8081/",
         song: this.state.songPlaying
@@ -44116,29 +44297,6 @@ var App = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return App;
-}(React.Component);
-
-var TrackDetails = /*#__PURE__*/function (_React$Component2) {
-  _inherits(TrackDetails, _React$Component2);
-
-  var _super2 = _createSuper(TrackDetails);
-
-  function TrackDetails(props) {
-    _classCallCheck(this, TrackDetails);
-
-    return _super2.call(this, props);
-  }
-
-  _createClass(TrackDetails, [{
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/React.createElement("div", {
-        className: "trackDetails"
-      });
-    }
-  }]);
-
-  return TrackDetails;
 }(React.Component);
 
 createRoot(document.getElementById("react")).render( /*#__PURE__*/React.createElement(App, null));

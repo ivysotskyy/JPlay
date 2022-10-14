@@ -3,7 +3,7 @@ package exercise.jplay.data.entity;
 import jakarta.persistence.*;
 
 import java.text.SimpleDateFormat;
-import java.time.Duration;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
@@ -20,7 +20,7 @@ public class AudioTrack {
     private String album;
     @Column(name = "duration_sec")
     private int durationSeconds;
-    private Date releaseDate;
+    private LocalDate releaseDate;
     private String comment;
     @Column(name = "file_path", nullable = false)
     private String filePath;
@@ -99,7 +99,7 @@ public class AudioTrack {
         this.genres = genres;
     }
 
-    public Date getReleaseDate() {
+    public LocalDate getReleaseDate() {
         return releaseDate;
     }
 
@@ -117,7 +117,7 @@ public class AudioTrack {
         return dateFormat.format(releaseDate);
     }
 
-    public void setReleaseDate(Date date) {
+    public void setReleaseDate(LocalDate date) {
         releaseDate = date;
     }
 

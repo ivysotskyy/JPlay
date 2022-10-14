@@ -3,26 +3,40 @@ const {createRoot} = require("react-dom/client");
 const axios = require("axios").default;
 const TrackList = require("./TrackList");
 const AudioPlayer = require("./AudioPlayer");
+const TrackDetails = require("./TrackDetails");
 
 class App extends React.Component {
 
     constructor(props) {
-
         super(props);
+        this.track = {
+            author: "",
+            title: "",
+            filePath: "",
+            fileName: "",
+            duration: 0,
+            releaseDate: "",
+            comment: "",
+            genres: []
+        }
         this.state = {
             audioTracks: [],
             selectedSong: "",
-            songPlaying: ""
+            songPlaying: this.track
         };
     }
 
     onPlayAction(track) {
-        console.log(track)
         this.setState({songPlaying: track})
     }
 
-    componentDidMount() {
+    onSelected(track) {
+        this.setState({
+            selectedSong: track
+        });
+    }
 
+    componentDidMount() {
         //Get api routes
         axios.get("/api/audioTracks?size=1000").then(response => {
             this.setState({
@@ -32,7 +46,6 @@ class App extends React.Component {
         }).catch(err => {
             console.log(err)
         })
-
     }
 
     render() {
@@ -42,25 +55,11 @@ class App extends React.Component {
          */
         return (
             <div className={"wrapper"}>
-                <TrackList onPlayButton={this.onPlayAction.bind(this)} audioTracks={this.state.audioTracks} links={this.state.links}/>
+                <TrackList handleTrackSelected={this.onSelected.bind(this)} onPlayButton={this.onPlayAction.bind(this)} audioTracks={this.state.audioTracks} links={this.state.links}/>
+                <TrackDetails track={this.state.selectedSong}></TrackDetails>
                 <AudioPlayer root={"http://localhost:8081/"} song={this.state.songPlaying}></AudioPlayer>
             </div>
         );
-    }
-
-}
-
-class TrackDetails extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <div className={"trackDetails"}>
-
-            </div>
-        )
     }
 
 }

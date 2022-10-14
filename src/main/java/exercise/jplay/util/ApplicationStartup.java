@@ -4,6 +4,11 @@ import exercise.jplay.data.entity.AudioTrack;
 import exercise.jplay.data.repository.AudioTrackRepository;
 import exercise.jplay.util.parser.AudioFileParser;
 import exercise.jplay.util.parser.Mp3FileParser;
+
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalUnit;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationContext;
@@ -13,6 +18,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,16 +69,21 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
                                                    p.toString() + " while initial scan.\n", e);
             }
         }
-        addMoreSongs(tracks); //test data
+        try {
+            addMoreSongs(tracks); //test data
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         repository.saveAll(tracks);
     }
 
     // Delete Me
-    private void addMoreSongs(List<AudioTrack> tracks) {
+    private void addMoreSongs(List<AudioTrack> tracks) throws ParseException {
         for(int i = 1; i <= 100; i++) {
             AudioTrack t = new AudioTrack();
+            SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
             t.setTitle("example track Nr. " + i);
-            t.setReleaseDate(Date.from(Instant.now()));
+            t.setReleaseDate(LocalDateTime.now().toLocalDate());
             t.setAuthor("Some Author");
             t.setComment("\""+i+"\"");
             t.setAlbum("Example album-"+i);

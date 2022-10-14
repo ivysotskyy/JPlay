@@ -5,11 +5,14 @@ module.exports = class AudioTrack extends React.Component {
     render() {
         const title = this.props.track.title
         return (
+
             <div className={"container"}>
                 <button onClick={(event) => {
                     this.props.onPlayButton(this.props.track);
                 }}>Play</button>
-                <div className={"track display"}>
+                <div onClick={event => {
+                    this.props.handleTrackSelected(this.props.track);
+                }} className={"track display"}>
                     <h3>{title != null ? title : this.props.track.fileName}</h3>
                     <div>{this.props.track.author}</div>
                     <div>{this.props.track.album}</div>
