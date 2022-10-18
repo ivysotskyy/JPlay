@@ -4,6 +4,7 @@ const axios = require("axios").default;
 const TrackList = require("./TrackList");
 const AudioPlayer = require("./AudioPlayer");
 const TrackDetails = require("./TrackDetails");
+const {BrowserRouter, Switch, Routes, Route, Link} = require("react-router-dom");
 
 class App extends React.Component {
 
@@ -38,10 +39,10 @@ class App extends React.Component {
 
     componentDidMount() {
         //Get api routes
-        axios.get("/api/audioTracks?size=1000").then(response => {
+        axios.get("/tracks").then(response => {
+            console.log(response)
             this.setState({
-                links: response.data._links,
-                audioTracks: response.data._embedded.audioTracks,
+                audioTracks: response.data,
             });
         }).catch(err => {
             console.log(err)
@@ -54,10 +55,15 @@ class App extends React.Component {
          * because of chrome security reasons.
          */
         return (
-            <div className={"wrapper"}>
-                <TrackList handleTrackSelected={this.onSelected.bind(this)} onPlayButton={this.onPlayAction.bind(this)} audioTracks={this.state.audioTracks} links={this.state.links}/>
-                <TrackDetails track={this.state.selectedSong}></TrackDetails>
-                <AudioPlayer root={"http://localhost:8081/"} song={this.state.songPlaying}></AudioPlayer>
+            <div className="app">
+                <header>
+                    <h2> <a href="#"></a> </h2>
+                </header>
+                <div className={"wrapper"}>
+                    <TrackList handleTrackSelected={this.onSelected.bind(this)} onPlayButton={this.onPlayAction.bind(this)} audioTracks={this.state.audioTracks}/>
+                    <TrackDetails track={this.state.selectedSong}></TrackDetails>
+                    <AudioPlayer root={"http://localhost:8081/"} song={this.state.songPlaying}></AudioPlayer>
+                </div>
             </div>
         );
     }

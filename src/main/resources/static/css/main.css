@@ -42,21 +42,29 @@ header {
 
 .track-details div{
     margin-bottom: 1rem;
-    display: flex;
     width: 100%;
 }
 
 .track-details form{
     min-width: 15rem;
+    max-width: 20rem;
     display: flex;
     flex-flow: column nowrap;
 }
 
 .genres {
+    display: flex;
     flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.new-genre button {
+    background-color: lightgreen;
 }
 
 .genres input, .genres div {
+    display: flex;
+    flex-basis: 33%;
     max-width: 5rem;
     min-width: 3rem;
 }

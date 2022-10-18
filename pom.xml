@@ -25,9 +25,9 @@
             <version>1.9.5.4</version>
         </dependency>
         <dependency>
-            <groupId>net.sf.javamusictag</groupId>
-            <artifactId>jid3lib</artifactId>
-            <version>0.5.4</version>
+            <groupId>net.jthink</groupId>
+            <artifactId>jaudiotagger</artifactId>
+            <version>3.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
