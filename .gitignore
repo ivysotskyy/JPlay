@@ -64,3 +64,4 @@ hs_err_pid*
 # database
 /data/
 /db/
+src/main/resources/static/built
