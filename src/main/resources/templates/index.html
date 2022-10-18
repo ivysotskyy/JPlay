@@ -1,0 +1,64 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JPlay</title>
+    <link href="/css/main.css" rel="stylesheet">
+</head>
+<body>
+<header>
+
+</header>
+<div class="tracks">
+    <div class="top-bar display">
+        <div>Title</div>
+        <div>Genres</div>
+        <div>Album</div>
+        <div>Duration</div>
+    </div>
+    <div class="track-list">
+        <div th:each="track : ${tracks}" class="track display">
+            <h3 th:text="${track.getTitle()} ? ${track.title} : ${track.getFileName()}"></h3>
+            <div th:text="${track.getAuthor()} ? ${track.author} : 'Unknown'"></div>
+            <div>
+                <a th:each="genre : ${track.genres}" href="#" th:text="${genre} + ' ' "></a>
+            </div>
+            <div th:text="${track.getAlbum()} ? ${track.album} : 'Unknown'"></div>
+            <div th:text="${track.getDurationSeconds()}"></div>
+            <!--<p th:text='|ReleaseDate: ${track.getReleaseDate("dd MMM yyy")}|'></p>-->
+            <!--<p th:text="|Path: ${track.getFilePath()}|"></p>-->
+        </div>
+    </div>
+
+<!--
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Album</th>
+            <th>Duration</th>
+            <th>Genres</th>
+            <th>Release Date</th>
+            <th>Comment</th>
+            <th>Path</th>
+        </tr>
+        <tr th:each="track : ${tracks}">
+            <td th:text="${track.getTitle()}"></td>
+            <td th:text="${track.getAuthor()}"></td>
+            <td th:text="${track.getAlbum()}"></td>
+            <td th:text="${track.getDurationTime()}"></td>
+            <td th:text="${track.getGenres()}"></td>
+            <td th:text='${track.getReleaseDate("dd MMM yyy")}'></td>
+            <td th:text="${track.getComment()}"></td>
+            <td th:text="${track.getFilePath()}"></td>
+        </tr>
+    </table>
+-->
+</div>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

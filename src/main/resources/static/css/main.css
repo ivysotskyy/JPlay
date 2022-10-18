@@ -1,3 +1,131 @@
-.hello-title {
-    color: darkgreen;
+body {
+    max-width: 80%;
+    min-width: 50%;
+    padding: 0;
+    margin: auto;
+
+}
+
+header {
+    height: 50px;
+    background: black;
+    padding: 0 0 10px;
+    margin: auto;
+}
+
+.wrapper {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.tracks {
+    overflow-y: auto;
+    max-width: 60%;
+    min-width: 40%;
+    max-height: 45rem;
+    min-height: 40rem;
+    border-radius: 4px;
+}
+
+.audio-player {
+    margin-top: 1rem;
+    padding: 0;
+    width: 100%;
+    height: 8rem;
+}
+
+.track-details {
+    padding: 20px;
+    max-width: 35%;
+    min-width: 20%;
+}
+
+.track-details div{
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.track-details form{
+    min-width: 15rem;
+    max-width: 20rem;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.genres {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.new-genre button {
+    background-color: lightgreen;
+}
+
+.genres input, .genres div {
+    display: flex;
+    flex-basis: 33%;
+    max-width: 5rem;
+    min-width: 3rem;
+}
+
+.genres div:last-child {
+    flex-basis: 100%;
+}
+
+.container {
+    width: 100%;
+    display:flex;
+}
+
+.display {
+    border: 1px solid #ddd;
+    padding: 0 5px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.display a {
+    color: black;
+    text-decoration: none;
+}
+
+.display a:hover {
+    text-decoration-line: underline;
+    font-weight: bold;
+}
+
+.display * {
+    min-width: 12rem;
+}
+
+.display :last-child {
+    text-align: right;
+}
+
+.top-bar {
+    top: 0;
+    position: -webkit-sticky;
+    position: sticky;
+    text-align: center;
+    background-color: darkgray;
+    opacity: 80%;
+}
+
+.track {
+    width: 100%;
+}
+
+.track:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+.track h3:first-child {
+    border-bottom: 1px solid #ddd;
+    flex-basis: 100%;
+}
+
+.current-track {
+    margin: 0.2rem 1rem;
 }

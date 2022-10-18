@@ -10,6 +10,9 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+# Node
+node_modules
+
 # Package Files #
 *.jar
 *.war
@@ -21,6 +24,7 @@
 
 HELP.md
 target/
+**.db
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -57,7 +61,6 @@ build/
 hs_err_pid*
 
 # database
-/data/
 /db
 src/main/resources/static/built
 /node_modules

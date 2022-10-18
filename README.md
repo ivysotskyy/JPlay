@@ -3,10 +3,9 @@
 ## Web based music player
 
 
-This project is mainly created to learn working on a lagreg scale project with
+This project is mainly created to learn working on a larger scale project with
 a bigger tech stack than simple test applications
-and get some experience working with *Spring Boot*, *Github*, *SQL* and the Web.  
-
+and get some experience working with *Spring Boot*, *GitHub*, *SQL* and the Web.
 
 ----
 <details> 
